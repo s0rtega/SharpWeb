@@ -308,7 +308,7 @@ Arguments:
                 var lastVisitTime = row["last_visit_time"];
                 Console.WriteLine("--- Chrome History (User: {0}) ---", user);
                 Console.WriteLine("URL           : {0}", row["url"]);
-                if (row["title"] != String.Empty)
+                if ((string)row["title"] != string.Empty)
                 {
                     Console.WriteLine("Title         : {0}", row["title"]);
                 }

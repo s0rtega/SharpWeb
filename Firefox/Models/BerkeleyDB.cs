@@ -68,7 +68,6 @@
                         {
                             Keys.Add(new KeyValuePair<string, string>(key, value));
                         }
-
                     }
                     page++;
                 }
@@ -83,7 +82,7 @@
 
         public string GetValueOfKey(string key)
         {
-            foreach(var k in this.Keys)
+            foreach (var k in this.Keys)
             {
                 if (k.Key == key)
                 {

@@ -26,7 +26,6 @@ Usage:
 
 Arguments:
     all       - Retrieve all Chrome, FireFox and IE/Edge credentials.
-    full      - The same as 'all'
     chrome    - Fetch saved Chrome logins.
     firefox   - Fetch saved FireFox logins.
     edge      - Fetch saved Internet Explorer/Microsoft Edge logins.
@@ -37,7 +36,7 @@ Arguments:
         static void Main(string[] args)
         {
 
-            string[] validArgs = { "all", "full", "chrome", "firefox", "-p", "edge" };
+            string[] validArgs = { "all", "chrome", "firefox", "-p", "edge" };
 
             bool getChrome = false;
             bool getFireFox = false;
@@ -56,7 +55,7 @@ Arguments:
                 string arg = args[i].ToLower();
                 if (Array.IndexOf(validArgs, arg) != -1)
                 {
-                    if (arg == "all" || arg == "full")
+                    if (arg == "all")
                     {
                         getChrome = true;
                         getEdge = true;

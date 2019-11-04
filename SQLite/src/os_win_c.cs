@@ -2056,8 +2056,6 @@ return SQLITE_OK;
       int bytesPerSector = SQLITE_DEFAULT_SECTOR_SIZE;
       StringBuilder zFullpath = new StringBuilder( MAX_PATH + 1 );
       int rc;
-      bool dwRet = false;
-      int dwDummy = 0;
 
       /*
       ** We need to get the full path name of the file
@@ -2275,7 +2273,6 @@ n += sizeof( long );
 */
     static int winCurrentTime( sqlite3_vfs pVfs, ref double prNow )
     {
-      FILETIME ft = new FILETIME();
       /* FILETIME structure is a 64-bit value representing the number of
       100-nanosecond intervals since January 1, 1601 (= JD 2305813.5).
       */

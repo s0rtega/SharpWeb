@@ -21,6 +21,15 @@ namespace SharpFox.Models
         public int timesUsed { get; set; }
     }
 
+    public class LoginFieldS
+    {
+        public string url { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
+
+
+    }
+
     public class HistoryItem
     {
         public string host { get; set; }

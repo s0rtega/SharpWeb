@@ -2252,8 +2252,6 @@ delmaster_out:
           }
         }
       }
-      /*NOTREACHED*/
-      Debugger.Break();
 
 end_playback:
       /* Following a rollback, the database file should be back in its original
