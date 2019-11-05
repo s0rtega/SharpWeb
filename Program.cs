@@ -1,15 +1,4 @@
 ﻿using System;
-using System.Data;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
-using System.Security.Cryptography;
-using System.Text;
-using System.Diagnostics;
-using System.Security.Principal;
-using System.IO;
-using System.Reflection;
-using CS_SQLite3;
 using SharpChrome;
 using SharpFox;
 using SharpEdge;
